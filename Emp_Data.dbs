@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Emp_Data" id="Project-2618" database="Sqlite" >
+	<schema name="Default" >
+		<table name="Departments" prior="Tbl" >
+			<column name="Department_ID" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Department_name" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_Departments" unique="PRIMARY_KEY" >
+				<column name="Department_ID" />
+			</index>
+			<fk name="fk_Departments" to_schema="Default" to_table="PositionsDepartment" >
+				<fk_column name="Department_ID" pk="Department_ID" />
+			</fk>
+		</table>
+		<table name="EmployeeProjects" prior="EmplProjects" >
+			<column name="Key" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Employee_ID" type="INTEGER" jt="4" />
+			<column name="Project_ID" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_EmployeeProjects" unique="PRIMARY_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Employee_ID" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Employee_ID_0" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Employee_ID_1" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Project_ID" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Employee_ID_2" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Project_ID_0" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Employee_ID_3" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Employee_ID_4" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_EmployeeProjects_Employee_ID_5" unique="UNIQUE_KEY" >
+				<column name="Employee_ID" />
+			</index>
+			<index name="unq_EmployeeProjects_Project_ID_1" unique="UNIQUE_KEY" >
+				<column name="Project_ID" />
+			</index>
+		</table>
+		<table name="Employees" prior="Tbl" >
+			<column name="Employee_ID" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Employee_first_name" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="Employee_last_name" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="travel_required" type="VARCHAR" length="30" jt="12" mandatory="y" >
+				<defo><![CDATA['no']]></defo>
+			</column>
+			<column name="Position_ID" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_Employees" unique="PRIMARY_KEY" >
+				<column name="Employee_ID" />
+			</index>
+			<index name="unq_Employees_Position_ID" unique="UNIQUE_KEY" >
+				<column name="Employee_ID" />
+			</index>
+			<index name="unq_Employees_Position_ID_0" unique="UNIQUE_KEY" >
+				<column name="Position_ID" />
+			</index>
+			<fk name="fk_Employees" to_schema="Default" to_table="EmployeeProjects" >
+				<fk_column name="Employee_ID" pk="Employee_ID" />
+			</fk>
+			<fk name="fk_Employees_0" to_schema="Default" to_table="EmployeeProjects" >
+				<fk_column name="Employee_ID" pk="Employee_ID" />
+			</fk>
+		</table>
+		<table name="Positions" prior="Tbl" >
+			<column name="Position_ID" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Position_name" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_Positions" unique="PRIMARY_KEY" >
+				<column name="Position_ID" />
+			</index>
+			<fk name="fk_Positions" to_schema="Default" to_table="PositionsDepartment" >
+				<fk_column name="Position_ID" pk="Position_ID" />
+			</fk>
+			<fk name="fk_Positions_0" to_schema="Default" to_table="PositionsSupervisor" >
+				<fk_column name="Position_ID" pk="Position_ID" />
+			</fk>
+			<fk name="fk_Positions_1" to_schema="Default" to_table="Employees" >
+				<fk_column name="Position_ID" pk="Position_ID" />
+			</fk>
+		</table>
+		<table name="PositionsDepartment" prior="Tbl" >
+			<column name="Key" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Position_ID" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Department_ID" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_PositionsDepartment" unique="PRIMARY_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_PositionsDepartment_Position_ID" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_PositionsDepartment_Position_ID_0" unique="UNIQUE_KEY" >
+				<column name="Position_ID" />
+			</index>
+			<index name="unq_PositionsDepartment_Department_ID" unique="UNIQUE_KEY" >
+				<column name="Department_ID" />
+			</index>
+		</table>
+		<table name="PositionsSupervisor" prior="Tbl" >
+			<column name="Key" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Position_ID" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Supervisor_ID" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_PositionsSupervisor" unique="PRIMARY_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_PositionsSupervisor_Position_ID" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_PositionsSupervisor_Supervisor_ID" unique="UNIQUE_KEY" >
+				<column name="Key" />
+			</index>
+			<index name="unq_PositionsSupervisor_Supervisor_ID_0" unique="UNIQUE_KEY" >
+				<column name="Supervisor_ID" />
+			</index>
+			<index name="unq_PositionsSupervisor_Position_ID_0" unique="UNIQUE_KEY" >
+				<column name="Position_ID" />
+			</index>
+		</table>
+		<table name="Projects" prior="Tbl" >
+			<column name="Project_ID" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Project_name" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_Projects" unique="PRIMARY_KEY" >
+				<column name="Project_ID" />
+			</index>
+			<fk name="fk_Projects" to_schema="Default" to_table="EmployeeProjects" >
+				<fk_column name="Project_ID" pk="Project_ID" />
+			</fk>
+		</table>
+		<table name="Supervisors" prior="Employees_0" >
+			<column name="Supervisor_ID" prior="Supervi_ID" type="INTEGER" jt="4" mandatory="y" />
+			<column name="Supervisor_first_name" type="VARCHAR" length="100" jt="12" />
+			<column name="Supervisor_last_name" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_Employees_0" unique="PRIMARY_KEY" >
+				<column name="Supervisor_ID" />
+			</index>
+			<fk name="fk_Supervisors" to_schema="Default" to_table="PositionsSupervisor" >
+				<fk_column name="Supervisor_ID" pk="Supervisor_ID" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-14d8" hide_fks="fk_Employees," show_column_type="y" show_relation="columns" >
+		<entity schema="Default" name="Departments" color="C1D8EE" x="1008" y="224" />
+		<entity schema="Default" name="EmployeeProjects" color="C1D8EE" x="432" y="48" />
+		<entity schema="Default" name="Employees" color="C1D8EE" x="48" y="128" />
+		<entity schema="Default" name="Positions" color="C1D8EE" x="352" y="336" />
+		<entity schema="Default" name="PositionsDepartment" color="C1D8EE" x="688" y="224" />
+		<entity schema="Default" name="PositionsSupervisor" color="C1D8EE" x="672" y="400" />
+		<entity schema="Default" name="Projects" color="C1D8EE" x="720" y="48" />
+		<entity schema="Default" name="Supervisors" color="3986C1" x="1008" y="384" />
+	</layout>
+</project>

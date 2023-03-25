@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="HW1_part2" id="Project-67c" database="Sqlite" >
+	<schema name="Default" >
+		<table name="Attendance" prior="Tbl" >
+			<column name="ID_Patient" type="INTEGER" jt="4" mandatory="y" >
+				<comment><![CDATA[Unique Identifier for each patient. This ID is not sequential in nature and can not be used in modeling]]></comment>
+			</column>
+			<column name="ID_HealthCamp" type="INTEGER" jt="4" mandatory="y" >
+				<comment><![CDATA[Unique Identifier for each camp. This ID is not sequential in nature and can not be used in modeling]]></comment>
+			</column>
+			<column name="Registration_Date" type="DATE" jt="91" mandatory="y" >
+				<comment><![CDATA[Date of Registration of the patient for the health camp]]></comment>
+			</column>
+			<column name="Var1" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Anonymized variable captured at time of registrations. This is numerical in nature and can only have discrete values]]></comment>
+			</column>
+			<column name="Var2" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Anonymized variable captured at time of registrations. This is numerical in nature and can only have discrete values]]></comment>
+			</column>
+			<column name="Var3" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Anonymized variable captured at time of registrations. This is numerical in nature and can only have discrete values]]></comment>
+			</column>
+			<column name="Var4" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Anonymized variable captured at time of registrations. This is numerical in nature and can only have discrete values]]></comment>
+			</column>
+			<column name="Var5" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Anonymized variable captured at time of registrations. This is numerical in nature and can only have discrete values]]></comment>
+			</column>
+			<column name="Donation" prior="D" type="INTEGER" jt="4" >
+				<comment><![CDATA[Amount of donation received at the camp]]></comment>
+			</column>
+			<column name="Health_score" type="FLOAT" jt="7" >
+				<comment><![CDATA[Health Score as detected by the test at the camp]]></comment>
+			</column>
+			<column name="Number_of_stall_visited" type="INTEGER" jt="4" >
+				<comment><![CDATA[Number of stalls visited at the camp]]></comment>
+			</column>
+			<column name="Last_Stall_Visited_Number" type="INTEGER" jt="4" >
+				<comment><![CDATA[Stall number of the stall which the patient visited last. For example, if a person visited only 2 stalls say number 1 and number 7. Then, this variable would be 7]]></comment>
+			</column>
+			<column name="Camp_format" prior="Camp_f" type="INTEGER" jt="4" mandatory="y" />
+			<index name="unq_Attendance_ID_HealthCamp" unique="UNIQUE_KEY" >
+				<column name="ID_Patient" />
+			</index>
+			<index name="unq_Attendance_ID_HealthCamp_0" unique="UNIQUE_KEY" >
+				<column name="ID_HealthCamp" />
+			</index>
+			<index name="pk_Attendance" unique="PRIMARY_KEY" >
+				<column name="ID_Patient" />
+				<column name="ID_HealthCamp" />
+				<column name="Camp_format" />
+			</index>
+		</table>
+		<table name="Health_Camp_Details" prior="Tbl" >
+			<column name="ID_HealthCamp" prior="Patient_ID" type="INTEGER" jt="4" mandatory="y" >
+				<comment><![CDATA[Unique Identifier for each camp. This ID is not sequential in nature and can not be used in modeling]]></comment>
+			</column>
+			<column name="Camp_Start_Date" type="DATE" jt="91" mandatory="y" >
+				<comment><![CDATA[Start Date of the Health Camp]]></comment>
+			</column>
+			<column name="Camp_End_Date" type="DATE" jt="91" mandatory="y" >
+				<comment><![CDATA[End Date of the Health Camp]]></comment>
+			</column>
+			<column name="Category1" type="VARCHAR" length="30" jt="12" mandatory="y" >
+				<comment><![CDATA[Category segmentation of the Health Camp - 1]]></comment>
+			</column>
+			<column name="Category2" type="VARCHAR" length="1" jt="12" mandatory="y" >
+				<comment><![CDATA[Category segmentation of the Health Camp - 2]]></comment>
+			</column>
+			<column name="Category3" type="INTEGER" jt="4" mandatory="y" >
+				<comment><![CDATA[Category segmentation of the Health Camp - 3]]></comment>
+			</column>
+			<index name="pk_Tbl" unique="PRIMARY_KEY" >
+				<column name="ID_HealthCamp" />
+			</index>
+			<fk name="fk_Health_Camp_Details" to_schema="Default" to_table="Attendance" >
+				<fk_column name="ID_HealthCamp" pk="ID_HealthCamp" />
+			</fk>
+		</table>
+		<table name="Patient_Profiles" prior="Tbl" >
+			<column name="ID_Patient" type="INTEGER" jt="4" mandatory="y" >
+				<comment><![CDATA[Unique Identifier for each patient. This ID is not sequential in nature and can not be used in modeling]]></comment>
+			</column>
+			<column name="Online_Follower" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Whether a patient follows MedCamp online or not]]></comment>
+			</column>
+			<column name="LinkedIn_Shared" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Whether the patient has shared details of a camp on his LinkedIn id]]></comment>
+			</column>
+			<column name="Twitter_Shared" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Whether the patient has tweeted about the health camp]]></comment>
+			</column>
+			<column name="Facebook_Shared" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+				<comment><![CDATA[Whether the patient has shared an update about the health camp]]></comment>
+			</column>
+			<column name="Income" type="INTEGER" jt="4" >
+				<comment><![CDATA[Income of the patient]]></comment>
+			</column>
+			<column name="Education_Score" type="INTEGER" jt="4" >
+				<comment><![CDATA[Score about education of the patient. Higher would mean better]]></comment>
+			</column>
+			<column name="Age" type="INTEGER" jt="4" >
+				<comment><![CDATA[Age of the patient (as captured at time of registration)]]></comment>
+			</column>
+			<column name="First_Interaction" type="DATE" jt="91" mandatory="y" >
+				<comment><![CDATA[Date of first interaction]]></comment>
+			</column>
+			<column name="City_Type" type="VARCHAR" length="1" jt="12" >
+				<comment><![CDATA[Category of the city]]></comment>
+			</column>
+			<column name="Employer_Category" type="VARCHAR" length="30" jt="12" >
+				<comment><![CDATA[Category of the employer]]></comment>
+			</column>
+			<index name="pk_Patient_Profiles" unique="PRIMARY_KEY" >
+				<column name="ID_Patient" />
+			</index>
+			<fk name="fk_Patient_Profiles_0" to_schema="Default" to_table="Attendance" >
+				<fk_column name="ID_Patient" pk="ID_Patient" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="HomeWork1_part2" id="Layout-45f" show_column_type="y" show_relation="columns" >
+		<comment><![CDATA[HW1_part2_ShmelkovYB]]></comment>
+		<entity schema="Default" name="Attendance" color="C1D8EE" x="416" y="48" />
+		<entity schema="Default" name="Health_Camp_Details" color="C1D8EE" x="864" y="80" />
+		<entity schema="Default" name="Patient_Profiles" color="C1D8EE" x="48" y="64" />
+	</layout>
+</project>
