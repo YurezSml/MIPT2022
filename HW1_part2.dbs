@@ -105,7 +105,7 @@
 			<column name="Income" type="INTEGER" jt="4" >
 				<comment><![CDATA[Income of the patient]]></comment>
 			</column>
-			<column name="Education_Score" type="INTEGER" jt="4" >
+			<column name="Education_Score" type="FLOAT" jt="7" >
 				<comment><![CDATA[Score about education of the patient. Higher would mean better]]></comment>
 			</column>
 			<column name="Age" type="INTEGER" jt="4" >
@@ -117,7 +117,7 @@
 			<column name="City_Type" type="VARCHAR" length="1" jt="12" >
 				<comment><![CDATA[Category of the city]]></comment>
 			</column>
-			<column name="Employer_Category" type="VARCHAR" length="30" jt="12" >
+			<column name="Employer_Category" type="VARCHAR" length="100" jt="12" >
 				<comment><![CDATA[Category of the employer]]></comment>
 			</column>
 			<index name="pk_Patient_Profiles" unique="PRIMARY_KEY" >
@@ -128,10 +128,79 @@
 			</fk>
 		</table>
 	</schema>
+	<connector name="Sqlite" database="Sqlite" host="localhost" port="7210" instance="E:/YandexDisk/DataScience/Education_MIPT/2sem_DataStorageSystems/HW_1/HW1_part2.dbs" useSystemProxy="false" />
 	<layout name="HomeWork1_part2" id="Layout-45f" show_column_type="y" show_relation="columns" >
 		<comment><![CDATA[HW1_part2_ShmelkovYB]]></comment>
 		<entity schema="Default" name="Attendance" color="C1D8EE" x="416" y="48" />
 		<entity schema="Default" name="Health_Camp_Details" color="C1D8EE" x="864" y="80" />
 		<entity schema="Default" name="Patient_Profiles" color="C1D8EE" x="48" y="64" />
+		<script name="Attendance" id="Editor-254e" language="SQL" >
+			<string><![CDATA[CREATE TABLE Attendance ( 
+	ID_Patient           INTEGER NOT NULL    ,
+	ID_HealthCamp        INTEGER NOT NULL    ,
+	Registration_Date    DATE NOT NULL    ,
+	Var1                 INTEGER NOT NULL DEFAULT 0   ,
+	Var2                 INTEGER NOT NULL DEFAULT 0   ,
+	Var3                 INTEGER NOT NULL DEFAULT 0   ,
+	Var4                 INTEGER NOT NULL DEFAULT 0   ,
+	Var5                 INTEGER NOT NULL DEFAULT 0   ,
+	Donation             INTEGER     ,
+	Health_score         FLOAT     ,
+	Number_of_stall_visited INTEGER     ,
+	Last_Stall_Visited_Number INTEGER     ,
+	Camp_format          INTEGER NOT NULL    ,
+	CONSTRAINT unq_Attendance_ID_HealthCamp UNIQUE ( ID_Patient ),
+	CONSTRAINT unq_Attendance_ID_HealthCamp_0 UNIQUE ( ID_HealthCamp ),
+	CONSTRAINT pk_Attendance PRIMARY KEY ( ID_Patient, ID_HealthCamp, Camp_format )
+ );
+]]></string>
+		</script>
+		<script name="Health_Camp_Details" id="Editor-24b1" language="SQL" >
+			<string><![CDATA[CREATE TABLE Health_Camp_Details ( 
+	ID_HealthCamp        INTEGER NOT NULL  PRIMARY KEY  ,
+	Camp_Start_Date      DATE NOT NULL    ,
+	Camp_End_Date        DATE NOT NULL    ,
+	Category1            VARCHAR(30) NOT NULL    ,
+	Category2            VARCHAR(1) NOT NULL    ,
+	Category3            INTEGER NOT NULL    ,
+	FOREIGN KEY ( ID_HealthCamp ) REFERENCES Attendance( ID_HealthCamp )  
+ );
+]]></string>
+		</script>
+		<script name="Patient_Profiles" id="Editor-889" language="SQL" >
+			<string><![CDATA[CREATE TABLE Patient_Profiles ( 
+	ID_Patient           INTEGER NOT NULL  PRIMARY KEY  ,
+	Online_Follower      INTEGER NOT NULL DEFAULT 0   ,
+	LinkedIn_Shared      INTEGER NOT NULL DEFAULT 0   ,
+	Twitter_Shared       INTEGER NOT NULL DEFAULT 0   ,
+	Facebook_Shared      INTEGER NOT NULL DEFAULT 0   ,
+	Income               INTEGER     ,
+	Education_Score      INTEGER     ,
+	Age                  INTEGER     ,
+	First_Interaction    DATE NOT NULL    ,
+	City_Type            VARCHAR(1)     ,
+	Employer_Category    VARCHAR(30)     ,
+	FOREIGN KEY ( ID_Patient ) REFERENCES Attendance( ID_Patient )  
+ );
+
+]]></string>
+		</script>
+		<script name="Patient_Profiles_001" id="Editor-23ae" language="SQL" >
+			<string><![CDATA[CREATE TABLE Patient_Profiles ( 
+	ID_Patient           INTEGER NOT NULL  PRIMARY KEY  ,
+	Online_Follower      INTEGER NOT NULL DEFAULT 0   ,
+	LinkedIn_Shared      INTEGER NOT NULL DEFAULT 0   ,
+	Twitter_Shared       INTEGER NOT NULL DEFAULT 0   ,
+	Facebook_Shared      INTEGER NOT NULL DEFAULT 0   ,
+	Income               INTEGER     ,
+	Education_Score      FLOAT     ,
+	Age                  INTEGER     ,
+	First_Interaction    DATE NOT NULL    ,
+	City_Type            VARCHAR(1)     ,
+	Employer_Category    VARCHAR(100)     ,
+	FOREIGN KEY ( ID_Patient ) REFERENCES Attendance( ID_Patient )  
+ );
+]]></string>
+		</script>
 	</layout>
 </project>
